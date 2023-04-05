@@ -50,7 +50,9 @@ To use the template, create a file next to `letter.typ` and use the important pa
 }
 ```
 
-The resulting pdf looks like shown in the `example` directory.
+The resulting pdf is included in the `examples` directory, but the first page looks like this:
+
+![example letter 1st page](examples/letter_fst_page.png)
 
 ## TODOS
 Because certain functionality is not possible in typst right now, here are some things I want to add later on.
