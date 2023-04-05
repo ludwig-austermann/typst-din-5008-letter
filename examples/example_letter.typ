@@ -1,4 +1,4 @@
-#import "letter.typ" : letter, defaults
+#import "../letter.typ" : letter, defaults
 #import emoji
 
 #let empfänger = (
