@@ -56,5 +56,5 @@ The resulting pdf is included in the `examples` directory, but the first page lo
 
 ## TODOS
 Because certain functionality is not possible in typst right now, here are some things I want to add later on.
-[ ] Footer depending on page number with correct sizing
-[ ] Even and odd pages distinction, so that margin fits
+- [ ] Footer depending on page number with correct sizing
+- [ ] Even and odd pages distinction, so that margin fits
