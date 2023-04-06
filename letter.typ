@@ -1,10 +1,10 @@
 #let defaults = (
   themecolor: navy,
-  greeting: "Sehr geehrte Damen und Herren",
-  goodbye: "Mit freundlichen Grüßen",
+  salutation: "Sehr geehrte Damen und Herren",
+  closing: "Mit freundlichen Grüßen",
   pagemarginright: 1.69cm,
-  falzmarke: true,
-  lochmarke: true,
+  folding_mark: true,
+  hole_mark: true,
   form: "A",
   handsigned: false
 )
@@ -21,8 +21,8 @@
 ]
 
 #let empfheader(person) = block(width: 85mm, height: 27.3mm, {
-  if person.keys().contains("ruecksendeangabe") {
-    place(dy: -17.7mm, text(8pt, underline(person.ruecksendeangabe, offset: 1.5pt)))
+  if person.keys().contains("return_information") {
+    place(dy: -17.7mm, text(8pt, underline(person.return_information, offset: 1.5pt)))
   }
   pad(x: 5mm, {// toaddrindent
   if person.keys().contains("topextra") {
@@ -40,9 +40,9 @@
   text(person.address)
 })
 
-#let betreffheader(content) = {
+#let betreffheader(content, options) = {
   //set align(center)
-  set text(navy)
+  set text(options.themecolor)
   strong(content)
   linebreak()
   linebreak()
@@ -54,12 +54,12 @@
   text(size: 10pt, content)
 }
 
-#let greetingblock(content: defaults.greeting) = {
+#let salutationblock(content: defaults.salutation) = {
   text(content + ",")
   linebreak()
 }
 
-#let goodbyeblock(name, content: defaults.goodbye, handsigned: false) = {
+#let closingblock(name, content: defaults.closing, handsigned: false) = {
   linebreak()
   text(content)
   linebreak()
@@ -71,9 +71,9 @@
 // look at: https://de.wikipedia.org/wiki/DIN_5008
 
 #let letter(
-  content, abs: (:), empf: (:), date: "", title: none,
+  content, sender: (:), recipient: (:), date: "", title: none,
   options: defaults,
-  bezugszeichen: (),
+  reference_signs: (),
   header: [], footer: []
 ) = {
   let topmargin = if options.form == "A" { 27mm } else { 45mm }
@@ -81,7 +81,7 @@
   let empftopmargin = infotopmargin + 12.7mm
   let faltmarke1 = topmargin + 60mm
   let faltmarke2 = faltmarke1 + 105mm
-  let lochmarke = 148.5mm
+  let hole_mark = 148.5mm
   let footercontent = locate(loc => {
     set align(horizon + right)
     set text(8pt)
@@ -113,37 +113,37 @@
     }),
     footer: footercontent,
     background: locate(loc => {
-      if options.falzmarke {
+      if options.folding_mark {
         place(left + top, dy: faltmarke1, line(stroke: gray, length: 5mm))
         place(left + top, dy: faltmarke2, line(stroke: gray, length: 5mm))
       }
-      if options.lochmarke { place(left + top, dy: lochmarke, line(stroke: gray, length: 7mm)) }
+      if options.hole_mark { place(left + top, dy: hole_mark, line(stroke: gray, length: 7mm)) }
     })
   )
   style(styles => move(dy: -topmargin, { // reverse margin
     place(dy: 8mm, block(width: 100mm, header))
-    let _emph = empfheader(empf);
-    let _info = infoheader(abs);
+    let _emph = empfheader(recipient);
+    let _info = infoheader(sender);
     place(top + left, dx: -5mm, dy: empftopmargin, _emph)
     place(dx: 100mm, dy: infotopmargin, _info)
 
     let infoheight = calc.max(40mm, measure(_info, styles).height)
     v(infoheight + 8.46mm)
-    if bezugszeichen.len() > 0 {
+    if reference_signs.len() > 0 {
       move(dy: infotopmargin,
         grid(
           columns: (50mm, 50mm, 50mm, auto),
           row-gutter: 8.46mm / 2,
-          ..bezugszeichen.map(k => bezugszeichenblock(k.at(0), k.at(1)))
+          ..reference_signs.map(k => bezugszeichenblock(k.at(0), k.at(1)))
         )
       )
       v(8.46mm)
     }
   }))
   
-  betreffheader(title)
-  greetingblock(content: options.greeting)
+  betreffheader(title, options)
+  salutationblock(content: options.salutation)
   set par(justify: true)
   content
-  goodbyeblock(abs.name, content: options.goodbye, handsigned: options.handsigned)
+  closingblock(sender.name, content: options.closing, handsigned: options.handsigned)
 }

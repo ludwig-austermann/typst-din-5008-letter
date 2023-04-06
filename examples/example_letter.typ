@@ -1,10 +1,9 @@
-#import "letter.typ" : letter, defaults
-#import emoji
+#import "../letter.typ" : letter, defaults
 
 #let empfänger = (
   address: [Frau\ Klara Musterfrau\ Wunderstr. 12A\ 12321 Berlin],
   topextra: [Vertraulich\ Nur von der Person persönlich zu öffnen\ Warum auch nicht],
-  ruecksendeangabe: [Max Mustermann, Feldweg 20, 32123 Einöde]
+  return_information: [Max Mustermann, Feldweg 20, 32123 Einöde]
 )
 
 #let absender = (
@@ -13,22 +12,20 @@
 )
 
 #{
-  defaults.form = "A" // kann auch 'B' sein
-  defaults.falzmarke = true
-  defaults.lochmarke = true
+  defaults.form = "A" // can also be form 'B'
+  defaults.folding_mark = true
+  defaults.hole_mark = true
   defaults.pagemarginright = 0.7cm
   //defaults.handsigned = true
 }
 
 #show: letter.with(
-  abs: absender,
-  empf: empfänger,
+  sender: absender,
+  recipient: empfänger,
   title: [Betreff dieses Briefes],
   date: [12.03.2418],
   options: defaults,
-  //greet: "Liebe Frau Klara Musterfrau",
-  //bye: "Viele Grüße",
-  bezugszeichen: (
+  reference_signs: (
     ([Briefnr.], [A2-335-F12]),
     ([Vertragsnr.], [137 288]),
     ([Datum], [12.03.2418])
@@ -37,7 +34,7 @@
   footer: [Und noch weiterer Text\ der leider nicht weiter]
 )
 
-#for i in (3, 12, 1, 4, 10, 5, 22, 7, 3, 12, 15, 35, 1) {
+#for i in (3, 12, 3, 12, 15, 35, 1) {
   lorem(10*i)
   parbreak()
 }
