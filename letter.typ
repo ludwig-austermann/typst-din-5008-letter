@@ -6,7 +6,8 @@
   folding_mark: true,
   hole_mark: true,
   form: "A",
-  handsigned: false
+  handsigned: false,
+  pagenumberonfirstpage: true,
 )
 
 // see https://ftp.rrze.uni-erlangen.de/ctan/macros/latex/contrib/koma-script/doc/scrguide-de.pdf
@@ -85,8 +86,10 @@
   let footercontent = locate(loc => {
     set align(horizon + right)
     set text(8pt)
-    text(options.themecolor)[#loc.page()]
-    text(gray.darken(50%), " / " + str(counter(page).final(loc).at(0)))
+    if options.pagenumberonfirstpage or loc.page() != 1 {
+      text(options.themecolor)[#loc.page()]
+      text(gray.darken(50%), " / " + str(counter(page).final(loc).at(0)))
+    }
     if loc.page() == 1 {
       v(4.23mm, weak: true)
       set align(left)

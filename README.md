@@ -28,6 +28,7 @@ Furthermore, there is a envelope template.
 | `options.themecolor` | color | Themenfarbe | theme color |
 | `options.salutation` | content | Grußformel / Anrede | greeting |
 | `options.closing` | content | Grußformel am Ende | closing |
+| `options.pagenumberonfirstpage`| bool | Klar | clear |
 
 In examples directory is `template_letter.*` which maps all fields of this class to a pdf.
 
