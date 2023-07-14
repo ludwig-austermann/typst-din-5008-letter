@@ -1,14 +1,13 @@
-#import "../envelope.typ": envelope
+#import "../letter.typ": envelope, helpers, letter-styling
+#import envelope: envelope, envelope-styling
 
-#let recipient = (
-  address: [recipient name\ recipient address],
-  topextra: [further information],
-  return_information: [return information]
+#let address-field = helpers.address-field([recipient name\ recipient address], return-information: [return information\ further information], styling: letter-styling())
+
+#envelope(
+  envelope-format: "DL",
+  sender-zone: pad(1cm)[sender name\ sender address],
+  frank-zone: pad(1cm)[frank zone],
+  read-zone: pad(y: 1cm, address-field),
+  encoding-zone: pad(5mm)[encoding zone],
+  debug: true
 )
-
-#let sender = (
-  name: [sender name],
-  address: [sender name\ sender address]
-)
-
-#envelope(sender: sender, recipient: recipient)

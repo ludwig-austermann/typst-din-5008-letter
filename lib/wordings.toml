@@ -1,0 +1,14 @@
+[de-formal]
+salutation = "Sehr geehrte Damen und Herren"
+closing = "Mit freundlichen Grüßen"
+attachments = "Anlagen"
+
+[de-informal]
+salutation = "Hallo"
+closing = "Liebe Grüße"
+attachments = "Anlagen"
+
+[debug]
+salutation = "<salutation>"
+closing = "<closing>"
+attachments = "<attachments>"

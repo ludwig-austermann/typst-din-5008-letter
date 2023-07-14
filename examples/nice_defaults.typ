@@ -1,36 +1,30 @@
-#import "../letter.typ" : letter, defaults
-#import emoji
+#import "../letter.typ" : letter, letter-styling, block-hooks, debug-options
 
-#let recipient = (
-  address: [recipient name\ recipient address]
+#let styling-options = letter-styling(
+  text-params: (lang: "en"),
+  hole-mark: false,
+  theme-color: green.darken(40%),
 )
 
-#let sender = (
-  name: [my friendly name],
-  address: [sender name\ sender address
-  #v(6mm)
-  Date: #h(1cm) some date]
+#let block-hooks = block-hooks(
+  letter-head: pad(10mm)[To be found at #link("https://github.com/ludwig-austermann/typst-din-5008-letter")],
+  footer: [some random footer],
+  subject: (content, styling: (:), extras: (:)) => {
+    set align(center)
+    set text(styling.theme-color)
+    strong(content)
+  }
 )
-
-#{
-  defaults.form = "A" // can also be form 'B'
-  defaults.folding_mark = true
-  defaults.hole_mark = false
-  defaults.salutation = [Hello my friend]
-  defaults.closing = [Best Regards]
-  defaults.themecolor = green.darken(40%)
-  //defaults.pagemarginright = 0.7cm
-  //defaults.handsigned = true
-}
 
 #show: letter.with(
-  sender: sender,
-  recipient: recipient,
-  title: align(center)[subject of letter],
-  date: [some date],
-  options: defaults,
-  header: [To be found at #link("https://github.com/ludwig-austermann/typst-din-5008-letter")],
-  footer: [footer]
+  title: "subject of this letter",
+  return-information: [@name, somewhere],
+  address-zone: [recipient name\ recipient address],
+  information-field: grid(columns: 2, column-gutter: 5mm, row-gutter: 6pt)[Sender:][@name][Address:][sender address][][][][][][][][][][][Date:][@date],
+  name: "Your Friendly Friend",
+  styling-options: styling-options,
+  block-hooks: block-hooks,
+  wordings: "de-informal",
 )
 
 #for i in (3, 12, 1) {

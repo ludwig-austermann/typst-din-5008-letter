@@ -1,40 +1,24 @@
-#import "../letter.typ" : letter, defaults
-#import emoji
+#import "../letter.typ" : letter, letter-styling, block-hooks, debug-options
 
-#let recipient = (
-  address: [recipient name\ recipient address],
-  topextra: [further information],
-  return_information: [return information]
+#let block-hooks = block-hooks(
+  letter-head: pad(10mm)[*header.* A DIN 5008 based Typst letter template, to be found at:\
+  #link("https://github.com/ludwig-austermann/typst-din-5008-letter")],
+  footer: [some footer]
 )
-
-#let sender = (
-  name: [sender name],
-  address: [sender name\ sender address]
-)
-
-#{
-  defaults.form = "A" // can also be form 'B'
-  defaults.folding_mark = true
-  defaults.hole_mark = true
-  defaults.salutation = [Some Salutation]
-  defaults.closing = [Some Closing]
-  //defaults.pagemarginright = 0.7cm
-  //defaults.handsigned = true
-}
 
 #show: letter.with(
-  sender: sender,
-  recipient: recipient,
+  name: text(green)[sender name],
+  return-information: [@name, somewhere\ further information],
+  address-zone: [recipient name\ recipient address],
+  information-field: grid(columns: 2, column-gutter: 5mm, row-gutter: 6pt)[Sender:][@name][Address:][sender address],
   title: [subject of letter],
-  date: [some date],
-  options: defaults,
-  reference_signs: (
+  reference-signs: (
     ([Reference 1], [A2-335-F12]),
     ([Reference 2], [137 288]),
-    ([Date], [some date])
+    ([Date], [@date])
   ),
-  header: [header. A DIN 5008 based Typst letter template, to be found at #link("https://github.com/ludwig-austermann/typst-din-5008-letter")],
-  footer: [footer]
+  block-hooks: block-hooks,
+  wordings: "debug"
 )
 
 #for i in (3, 12, 3, 12, 15, 35, 1) {

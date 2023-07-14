@@ -1,0 +1,8 @@
+[package]
+name = "din-5008-letter"
+version = "0.1.0"
+entrypoint = "letter.typ"
+authors = ["Ludwig Austermann"]
+license = "MIT"
+description = "DIN 5008 conform letter template."
+repository = "https://github.com/ludwig-austermann/typst-din-5008-letter"
