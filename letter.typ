@@ -96,7 +96,7 @@
   ps:                 none,
   signature:          none,
   name:               [You should change the `name` argument :/],
-  date:               datetime.today().display(),
+  date:               datetime.today().display("[year]-[month]-[day]"),
   wordings:           auto,
   styling-options:    letter-styling(),
   debug-options:      debug-options(),
@@ -145,7 +145,7 @@
 
   if wordings == auto {
     wordings = load-wordings(lang + "-formal")
-  } else if type(wordings) == "string" {
+  } else if type(wordings) == str {
     wordings = load-wordings(wordings)
   }
 

@@ -1,4 +1,7 @@
 # Changelog
+## Version 0.1.1
+- Fixed type checking according to typst 0.8
+
 ## Version 0.1.0
 - Added local package presets
 - Changed date to automatically take todays date conform to the DIN (`YYYY-MM-DD`)

@@ -7,9 +7,9 @@ print $'(ansi bo)found following typst files:(ansi reset) ($source_files | str j
 def compile_typst [file, --png] {
     let run_result = (if $png {
         let file_without_ext = ($file | str replace '(.*).typ' '$1')
-        do { typst --root .. c $file $'($file_without_ext)_page{n}.png' }
+        do { typst c $file $'($file_without_ext)_page{n}.png' --root .. }
     } else {
-        do { typst --root .. c $file }
+        do { typst c $file --root .. }
     } | complete)
     if $run_result.exit_code == 0 {
         if $png {
