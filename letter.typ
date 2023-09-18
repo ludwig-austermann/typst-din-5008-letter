@@ -105,9 +105,9 @@
   extra-options:      (:),
 ) = {
   /*let font-size = if styling-options.text-params.keys().contains("size") {
-    if styling-options.text-params.size < 10pt {
-      panic("The general font size should be at least 10pt!")
-    }
+  if styling-options.text-params.size < 10pt {
+    panic("The general font size should be at least 10pt!")
+  }
     styling-options.text-params.size
   } else {
     styling-options.text-params.insert("size", 11pt)

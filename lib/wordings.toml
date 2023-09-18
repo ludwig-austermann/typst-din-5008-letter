@@ -12,3 +12,8 @@ attachments = "Anlagen"
 salutation = "<salutation>"
 closing = "<closing>"
 attachments = "<attachments>"
+
+[en-formal]
+salutation = "Dear Sir or Madam"
+closing = "Yours faithfully"
+attachments = "Attachments"

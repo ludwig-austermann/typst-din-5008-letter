@@ -24,7 +24,7 @@
   name: "Your Friendly Friend",
   styling-options: styling-options,
   block-hooks: block-hooks,
-  wordings: "de-informal",
+  wordings: "en-formal",
 )
 
 #for i in (3, 12, 1) {
